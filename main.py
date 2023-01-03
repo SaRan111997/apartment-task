@@ -1,61 +1,49 @@
-
-blocks = [
-{
-    "gym": False,
-    "school": True,
-    "store": False,
-},
-{
-    "gym": True,
-    "school": False,
-    "store": False,
-},
-
-{
-    "gym": True,
-    "school": True,
-    "store": False,
-},
-{
-    "gym": False,
-    "school": True,
-    "store": False,
-},
-
+blocks=[
 {
 "gym": False,
 "school": True,
-"store": True,
-}
-]
-reqs = ["gym", "school", "store"]
+"store": False,
+},
+{
+"gym": True,
+"school": False,
+"store": False,
+},
+{
+"gym": True,
+"school": True,
+"store": False,
+},
+{
+"gym": False,
+"school": True,
+"store": False,
+},
+{
+"gym": False,
+"school": False,
+"store": False,
+}]
 
-def find_optimal_block(blocks, reqs):
-  # Initialize the minimum distance to be the maximum possible distance
-  min_distance = len(blocks)
-  # print(min_distance)
-  # Initialize the optimal block index to be -1
-  optimal_block_index = -1
+reqs=["gym","school","store"]
 
-  # Iterate through each block
-  for i, block in enumerate(blocks):
-    # Initialize the distance to 0
-    # print(i,block)
-    distance = 0
-    # Iterate through each requirement
-    for req in reqs:
-      # print(block[req])
-      # If the requirement is not in the block, increment the distance
-      if not block[req]:
-        # print(block[req])
-        distance += 1
-    # If the distance is smaller than the current minimum distance, update the minimum distance and the optimal block index
-    if distance < min_distance:
-      min_distance = distance
-      optimal_block_index = i
 
-  # Return the optimal block index
-  return optimal_block_index
-optimal_block_index = find_optimal_block(blocks, reqs)
+def apartmentHunting(blocks, reqs):
+    optimal_index = 0
+    max_distance = 0
+    # print(optimal_index)
+    for i, block in enumerate(blocks):
+        # print(block)
+        distance = 0
+        for req in reqs:
+            # print(block[req])
+            if not block[req]:
+                distance += 1
+        # print(distance)
+        if distance > max_distance:
+            max_distance = distance
+            optimal_index = i
+    result = ''' is the farthest you'd have to walk to reach a gym, a school, or a store is ''' + str(optimal_index) + ''' block; at any other index, you'd have to walk farther'''
+    return 'index -> '+str(optimal_index) + result
 
-print(optimal_block_index)
+print(apartmentHunting(blocks, reqs))
